@@ -1,9 +1,12 @@
 var mongoose=require("mongoose");
 mongoose.connect("mongodb://localhost/myDatabase");
-var Schema=mongoose.Schema;
 
-module.exports=function(){
-var db=mongoose.connection;
+module.exports={
+    'secret': 'ilovescotchyscotch',
+    "algorithm" : 'aes-256-ctr',
+        "key" : 'd6F3Efeq',
+  "connect":function(){
+  var db=mongoose.connection;
 
 db.on('error',function(err){
   console.log("connection error: ",err);
@@ -13,4 +16,4 @@ db.on('error',function(err){
 //   console.log("connection to DB successful");
 // })
 }
-module.exports=Schema;
+}

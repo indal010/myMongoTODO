@@ -1,43 +1,29 @@
-var Schema=require("../config");
+var config=require("../config");
+var express=require("express");
+var crypto=require("crypto");
+var app=express();
 var mongoose=require("mongoose");
-var crypto = require('crypto');
+var Schema=mongoose.Schema;
+var jwt    = require('jsonwebtoken');
 validators = require('mongoose-validators');
-var Schema = mongoose.Schema;
-algorithm = 'aes-256-ctr';
-    key = 'd6F3Efeq';
-var userSchema=new Schema({
-  name: { type: String, required: true,unique:true,validate:validators.isAlpha()},
-  email: {type:String,required:true,validate:validators.isEmail()},
+    app.set('superSecret', config.secret);
+
+var userSchema=Schema({
+  name: { type: String, required: true,validate:validators.isAlpha()},
+  email: {type:String,required:true,unique:true,validate:validators.isEmail()},
   password:{type:String,required: true},
   created_at: Date,
   updated_at: Date
                   });
      userSchema.statics.register = function(signupdata,callback)
      {
-        var password=encrypt(signupdata.password);
-        var userData={
-              name:signupdata.name,
-              email:signupdata.email,
-               password:password
-              };
-      var testdata = new  User(userData);
+       var token;
+
+      var testdata = new  User(signupdata);
       try
          {
-            testdata.save(function(err, data){
-              if(err)
-              {
-                callback(err,null);
-                return;
-              }
-                else
-                 {
-                   callback(null,"success");
-                   console.log ('Success:' , data);
-                 }
-
-              });
-               return true;
-    }
+            testdata.save(callback);
+       }
     catch(err)
         {  console.log(err);
            }
@@ -51,42 +37,23 @@ var userSchema=new Schema({
        next();
     }) ;
 
-      userSchema.statics.checkLogin=function(loginData,callback)
+       userSchema.statics.checkLogin=function(loginData,callback)
         {
-         User.findOne({email:loginData.email},function(err, docs){
-                if (err)
-                  callback(err,null);
-                 else
-                {
-                  if(docs)
-                  {
-                   var encryptUserPassword=encrypt(loginData.password);
-                    if(encryptUserPassword==docs.password)
-                      {
-                        callback(null,"login success");
-                    }
-                      else
-                        callback(null,"password did not match");
-
-                   }
-                  else
-                  callback(null,"not authenticated");
-                }
-         });
+         User.findOne({email:loginData.email,password:loginData.password},callback);
        }
 
-    function encrypt(text){
-      var cipher = crypto.createCipher(algorithm,key);
+       userSchema.statics.userInfo=function(_id,callback)
+        {
+            User.findById(_id,callback);
+       }
+
+
+  userSchema.statics.encrypt=  function(text){
+      var cipher = crypto.createCipher(config.algorithm,config.key);
       var crypted = cipher.update(text,'utf8','hex')
       crypted += cipher.final('hex');
       return crypted;
     }
-
-
-
-
-
-
 
 var User=mongoose.model("User",userSchema);
 module.exports=User;
