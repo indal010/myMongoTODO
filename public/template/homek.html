@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My Google Keep</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../css/myStyle.css">
+     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+     <script src="https://unpkg.com/packery@2/dist/packery.pkgd.min.js"></script>
+     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+     </script>
+     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+     <script src="../bower_components/handlebars/handlebars.min.js" type="text/javascript"></script>
+     <script src="../js/myjs.js"></script>
+  </head>
+  <body>
+<div class="container-fluid">
+  <div class="row">
+ <div class="topnav" id="myTopnav">
+  <ul style="list-style-type:none">
+
+  <li><a href="#" style="font-size:25px;font-weight:bold;" id="icon"><i class="fa fa-align-justify" aria-hidden="true"></i></span></a></li>
+  <li style="margin-top:8px"><h4><strong>Google</strong> Keep</h4></li>
+  <li><input id="search" type="text"></li>
+  <div class="dropdown" style="float:right">
+   <li><a href="#" title="your account" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i></a></li>
+    <ul class="dropdown-menu">
+     <li><a href="#">HTML</a></li>
+     <li><a href="#">CSS</a></li>
+     <li><a href="#">JavaScript</a></li>
+   </ul>
+ </div>
+
+  <li style="float:right"><a href="#" title="notification"><i class="fa fa-bell fa-lg" aria-hidden="true"></i></a><li>
+  <li style="float:right"><a id="viewer" href="javascript:changer();" title="grid/list view"><i class="fa fa-th fa-lg" aria-hidden="true"></i></a></li>
+  <li style="float:right"><a title="refresh" id="refresh"><i class="fa fa-refresh fa-lg" aria-hidden="true"></i></a></li>
+
+</ul>
+</div>
+
+<div id="mySidenav" class="sidenav">
+  <pre>
+<a href="#"><i class="fa fa-sticky-note fa-lg" aria-hidden="true"></i>   Notes</a>
+<a href="#"><i class="fa fa-hand-pointer-o fa-lg" aria-hidden="true"></i>   Reminders</a>
+<hr>
+<a href="#"><i class="fa fa-plus fa-lg" aria-hidden="true"></i>    Create new label</a>
+<a href="#"><i class="fa fa-archive fa-lg" aria-hidden="true"></i>    Archive</a>
+<a href="#"><i class="fa fa-trash fa-lg" aria-hidden="true"></i>    Trash</a><hr>
+<a href="#"><i class="fa fa-cog fa-lg" aria-hidden="true"></i>    Setting</a>
+<a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>    Send feedback</a>
+<a href="#"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i>    Help</a>
+<a href="#"><i class="fa fa-download fa-lg" aria-hidden="true"></i>    App downloads</a>
+<a href="#"><i class="fa fa-keyboard-o fa-lg" aria-hidden="true"></i>    Keyboard shortcuts </a>
+</pre>
+</div>
+</div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+  </div>
+  <div class="col-md-6">
+<div id="main">
+    <div id="clickHere">
+        <input type="text" id="i1" class="form-control" style="box-shadow:0 1px 1px;border:none;" placeholder="Take a note..."></input>
+    </div>
+      <div id="msgbox" style="background-color:#ffffff;">
+          <div id="i2" data-text="Title" contenteditable=true style="outline:none;font-weight:bold;"></div>
+            <div id="i3" data-text="Take  a Note..." contenteditable=true style="outline:none"></div>
+          <p style="background-color:white;"><i style="margin-left:16px" class="fa fa-hand-pointer-o fa-lg" aria-hidden="true"></i>
+              <i style="margin-left:16px" class="fa fa-user-plus fa-lg" aria-hidden="true"></i>
+              <i style="margin-left:16px" class="fa fa-paint-brush fa-lg" aria-hidden="true"></i>
+              <i style="margin-left:16px" class="fa fa-picture-o fa-lg" aria-hidden="true"></i>
+              <i style="margin-left:16px" class="fa fa-archive fa-lg" aria-hidden="true"></i><button style="outline:none;margin-left:17em;border:none;background-color:white" type="button" id="done"><strong>DONE</strong></button>
+          </p>
+      </div>
+    </div>
+</div>
+</div>
+<div class="col-md-12" id="content" style="min-height:100px;overflow-x:hidden;margin-left:100px;"></div>
+  </body>
+</html>

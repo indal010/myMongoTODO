@@ -29,11 +29,11 @@ var validator=
                       "password":{in: "body",
                         notEmpty: {
                         errorMessage: "password field is required and it can not be blank"
-                      },
-                      matches: {
-                           options: [/^[a-zA-Z0-9!@#$%^&*]{6,16}$/],
-                             errorMessage: "enter valid password"
-                            }
+                      }
+                      // matches: {
+                      //      options: [/^[a-zA-Z0-9!@#$%^&*]{6,16}$/],
+                      //        errorMessage: "enter valid password"
+                      //       }
                        }
                       },
 checkSystemErrors : function(err) {

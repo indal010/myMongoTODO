@@ -1,9 +1,9 @@
 body#bdy{
-  background-color: navajowhite;
+  background-color:#e8e8e8;
 }
 li:hover
 {
-  background-color: aqua;
+  /*background-color: aqua;*/
 
 }
 #nav1

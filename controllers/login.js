@@ -1,14 +1,12 @@
-var cookieParser = require('cookie-parser');
 var express=require("express");
 var jwt    = require('jsonwebtoken');
 var login=require("../models");
 var app=express();
 var config=require("../config");
 var validation=require("../config/validation");
-app.use(cookieParser());
 var route=express.Router();
-  app.set('superSecret', config.secret);
-route.post("/",function(request,response)
+ app.set('superSecret', config.secret);
+ route.post("/",function(request,response)
   {
     var result={};
     result.status=false;
@@ -19,7 +17,7 @@ route.post("/",function(request,response)
     try {
     if(!isValid.isEmpty())
     {
-      console.log("error");
+      //console.log("error");
       var errors=request.validationErrors();
       throw errors[0].msg;
     }
@@ -33,6 +31,7 @@ route.post("/",function(request,response)
        }
        else
         {
+          console.log(msg);
           token = jwt.sign({_id:msg._id}, app.get('superSecret'), {
                 expiresIn: 24*60*60*1000 // expires in 24 hours
                       });

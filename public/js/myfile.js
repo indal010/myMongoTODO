@@ -6,7 +6,6 @@ $(document).ready(function() {
          type: "GET",
           //dataType: 'JSON',
          success: function(response) {
-          // console.log('page was loaded', response);
             if(response.status==true)
                 homepage();
           //if(document.cookie===undefined)
@@ -117,7 +116,7 @@ $.ajax({
      $(".validation").remove();
      if(!re.test(userEmail))
       $("#email_id").after("<p class='validation' style='color:red;'>Enter a valid email address</p>");
-    else  if(userPassword.length<=5)
+    else  if(userPassword.length<1)
         $("#password").after("<p class='validation' style='color:red;'>Enter atleast 8 digit password</p>");
         else
          ajaxloginCall(login,"login");
@@ -127,15 +126,18 @@ $.ajax({
 
 function setResult()
 {
+
   $.ajax({
-          url:"../view/success.html",
+          url:"../template/homek.html",
             //async:false,
             //type:"GET",
               dataType:'html',
               success: function(data,textStatus,jqXHR)
                    {
                      console.log("printed");
+                       $("body").empty();
                         $("body").html(data);
+                        //window.location.hash="#homePage";
                           }
                     });
 }
@@ -176,12 +178,13 @@ function ajaxloginCall(userPassedObject)
 function ajaxsignUpCall(userPassedObject)
 {
   $.ajax({
-    url: "/signup",
+    url: "http://localhost:8086/signup",//http://localhost:8086/signup
     type: "POST",
     dataType: 'JSON',
     data:userPassedObject,
     success: function(response)
      {
+       console.log(response.status);
        if(response.status===true)
         {
           console.log("successfully registered");

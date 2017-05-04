@@ -1,3 +1,4 @@
+
 var express=require("express");
 var validator=require("express-validator");
 var morgan      = require('morgan');
@@ -8,7 +9,7 @@ var bodyParser=require("body-parser");
 var port = process.env.PORT || 8086;
 
 
-// app.use(express.static("./public"));
+app.use(express.static("./public"));
 app.use(morgan('dev'));
 app.use(cors());
 app.use(validator());

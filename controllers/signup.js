@@ -6,12 +6,15 @@ var route=express.Router();
 
 route.post("/",function(request,response)
 {
+
+  console.log("this is signup page");
   var result={};
   result.status=false;
 try{
   request.check(validation.validationSchema.signup);
   request.getValidationResult().then(function(foundInvalid)
   {
+    console.log(foundInvalid);
   try {
   if(!foundInvalid.isEmpty())
   {
@@ -33,6 +36,7 @@ catch(err)
          result.message="some problem occured bcoz of issue in server";
           if(!validation.validationSchema.checkSystemErrors(err))
           {
+            console.log("rr");
             result.status=false;
             result.message=err;
           }
